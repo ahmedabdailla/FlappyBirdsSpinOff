@@ -26,7 +26,7 @@ public class GameManager : FlappyBirdsSingleton<GameManager>
         if(ResetGameObjects.Contains(registerer))
             ResetGameObjects.Remove(registerer);    }
     
-    public bool isGameEnded;
+    public bool isGameEnded = false;
 
     public void ResetGame()
     {

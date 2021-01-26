@@ -12,8 +12,10 @@ public class ParallexEffect : IResetGame
     
     private Transform _transform;
     private Vector3 OriginalPosition;
-
+    private float _speed;
+    
     public UnityEvent OnReset;
+    
     private void Awake()
     {
         _transform = GetComponent<Transform>();
@@ -30,13 +32,20 @@ public class ParallexEffect : IResetGame
     {
         while (!GameManager.Instance.isGameEnded)
         {
+            if(GameManager.Instance.currentPlayer)
+                _speed = speed + (speed * (GameManager.Instance.currentPlayer.Jumps / 100f));
+            else
+            {
+                _speed = speed;
+            }
+            
             if (_transform.position.x <= ResetAt){
                 _transform.position = OriginalPosition;
                 OnReset.Invoke();
             }
             else
             {
-                _transform.position -= new Vector3(speed, 0);
+                _transform.position -= new Vector3(_speed, 0);
             }
             
             yield return new WaitForFixedUpdate();

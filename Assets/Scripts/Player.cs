@@ -11,7 +11,9 @@ public class Player : IResetGame
     public int Jumps;
 
     [Header("Player Settings")] public float JumpSpeed;
-    public float MoveSpeed;
+    
+    // Hardness
+    private float _JumpSpeed;
     
     // Boolean Checks
     private bool isJumping = false;
@@ -72,6 +74,8 @@ public class Player : IResetGame
         isJumping = true;
         _transform.rotation = Quaternion.Euler(0,0,45);
         Jumps++;
+        //_JumpSpeed = JumpSpeed + (JumpSpeed * (Jumps / 100f)); 
+
         _rigidbody2D.velocity = Vector2.up * JumpSpeed;
     }
 
